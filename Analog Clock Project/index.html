@@ -1,0 +1,58 @@
+<style>
+#clock{
+    position: relative;
+    background: url(clock_face.png) no-repeat;
+    width: 316px;
+    height: 316px;
+}
+#clock > #hh, #mh, #sh{
+    position: absolute;
+    transform-origin: bottom;
+    background: #0099cc;
+    border-radius: 7px;
+    opacity: 1;
+}
+#clock > #hh{
+    width: 10px;
+    height: 84px;
+    top: 35px;
+    left: 104.7px;
+}
+#clock > #mh{
+    width: 6px;
+    height: 84px;
+    top: 34px;
+    left: 106px;
+}
+#clock > #sh{
+    width: 2px;
+    height: 85px;
+    top: 29px;
+    left: 110px;
+    opacity: .3;
+}
+</style>
+<script>
+var d, h, m, s, hdeg, ampm; // TODO: move these as locale variables in the adjustClock function
+function adjustClock(){
+    d = new Date();
+    h = d.getHours(); // TODO: use more descriptive variable names
+    m = d.getMinutes();
+    s = d.getSeconds();
+    hdeg = h*30 + m/2; // TODO: define any numerical inputs as variables
+    if(h >= 12){ ampm = "PM"; } else { ampm = "AM"; }
+    hh.style.transform = "rotate("+hdeg+"deg)";
+    mh.style.transform = "rotate("+m*6+"deg)";
+    sh.style.transform = "rotate("+s*6+"deg)";
+    meridiem.innerHTML = ampm;
+}
+window.addEventListener("load", function(){
+    setInterval( adjustClock, 1000);
+} );
+</script>
+<div id="clock">
+    <div id="hh"></div>
+    <div id="mh"></div>
+    <div id="sh"></div>
+    <div id="meridiem"></div>
+</div>
